@@ -8,6 +8,17 @@
 
 <body>
     <h3 align="center">{{msg}}</h3>
-    <p>First {{x}} rows: {{df}}</p>
+    <p>{{df}}</p>
+    <br>
+    <form action="/show_analytics" method="post" align="center">
+        <label for="analytics"><h4>Select an option:</h4></label>
+        <br>
+        <select name="option" id="opt">
+            <option value="opt1">Option 1</option>
+            <option value="opt2">Option 2</option>
+            <option value="opt3">Option 3</option>
+        </select>
+        <input type="submit" value="Submit">
+    </form>
 
 </body>
