@@ -1,6 +1,7 @@
 import os
 from flask import Flask,render_template,request
 from src.data_cleaning import data_cleaner
+from src.generate_analytics import generate_finance
 
 app = Flask(__name__)
 
@@ -26,7 +27,7 @@ def upload_file():
     file.filename='supermarket.csv'
     file_path = './datasets/' + file.filename
     file.save(file_path)
-    df=data_cleaner(file_path)
+    # df=data_cleaner(file_path)
     msg = 'File uploaded successfully.'
     return render_template('analytics_form.html', msg=msg,df="")
 
@@ -42,6 +43,15 @@ def show_file():
 
 #-------------------------------------------------------#
 
+## Analytics
+@app.route('/show_analytics', methods=['POST'])
+def show_analytics():
+    file_path = './datasets/supermarket.csv'
+    df=data_cleaner(file_path)
+    selected_opt = request.form['opt']
+    if(selected_opt=="fin"):
+        loc = generate_finance(df)
+        return render_template('analytics.html')
 
 
 @app.errorhandler(500)
