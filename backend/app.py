@@ -1,7 +1,7 @@
 import os
-from flask import Flask,render_template,request
-from src.data_cleaning import data_cleaner
-from src.generate_analytics import generate_finance
+from flask import Flask,render_template,request,jsonify
+import requests
+import pandas as pd
 
 app = Flask(__name__)
 
@@ -18,40 +18,42 @@ def upload_file():
     ## If no file uploaded
     if 'file' not in request.files:
         return 'No file part'
+    
     ## Access file
     file = request.files['file']
+
     ## If file name null
     if file.filename == '':
         return 'No selected file'
+    
     ##Ideal
     file.filename='supermarket.csv'
-    file_path = './datasets/' + file.filename
+    file_path = '../data/' + file.filename
     file.save(file_path)
-    # df=data_cleaner(file_path)
     msg = 'File uploaded successfully.'
-    return render_template('analytics_form.html', msg=msg,df="")
+    return render_template('analytics_form.html', msg=msg)
 
 #-------------------------------------------------------#
 
-## Get to same page
+# ## Get to same page
 @app.route('/analyticsForm', methods=['GET'])
-def show_file():
-    file_path = './datasets/supermarket.csv'
-    df=data_cleaner(file_path)
-    msg="Summary view of file:"
-    return render_template('analytics_form.html', msg=msg,df=df.head(5))
+def show_data():
+    # response = requests.get('http://localhost:4000/showData')
+    message = "Summary view of file:"
+    return render_template('analytics_form.html', msg=message)
+    # return jsonify(response.json())
 
 #-------------------------------------------------------#
 
 ## Analytics
-@app.route('/show_analytics', methods=['POST'])
-def show_analytics():
-    file_path = './datasets/supermarket.csv'
-    df=data_cleaner(file_path)
-    selected_opt = request.form['opt']
-    if(selected_opt=="fin"):
-        loc = generate_finance(df)
-        return render_template('analytics.html')
+# @app.route('/show_analytics', methods=['POST'])
+# def show_analytics():
+#     file_path = './datasets/supermarket.csv'
+#     df=data_cleaner(file_path)
+#     selected_opt = request.form['opt']
+#     if(selected_opt=="fin"):
+#         loc = generate_finance(df)
+#         return render_template('financial_analytics.html')
 
 
 @app.errorhandler(500)
