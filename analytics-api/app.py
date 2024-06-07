@@ -8,11 +8,11 @@ app = Flask(__name__)
 
 #-------------------------------------------------------#
 
-# @app.route('/showData', methods=['GET'])
-# def show_data():
-#     data_head = data_cleaner(file_path).head()
-#     data_json = data_head.to_json()
-#     return jsonify(data_json)
+@app.route('/showData', methods=['GET'])
+def show_data():
+    data_head = data_cleaner(file_path).head()
+    data_json = data_head.to_json()
+    return jsonify(data_json)
 
 #-------------------------------------------------------#
 

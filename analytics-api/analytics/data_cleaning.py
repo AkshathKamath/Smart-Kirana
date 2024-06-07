@@ -49,5 +49,3 @@ def data_cleaner(file_path):
     df.drop(columns=['Unnamed: 0','Invoice ID','Time','Date'],inplace=True)
     # print(df.head())
     return df
-
-
