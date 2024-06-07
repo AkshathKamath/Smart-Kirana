@@ -10,8 +10,8 @@ app = Flask(__name__)
 
 @app.route('/showData', methods=['GET'])
 def show_data():
-    data_head = data_cleaner(file_path).head()
-    data_json = data_head.to_json()
+    data_size = data_cleaner(file_path).shape[0]
+    data_json = {"size":data_size}
     return jsonify(data_json)
 
 #-------------------------------------------------------#
