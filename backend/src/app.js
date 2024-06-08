@@ -63,7 +63,7 @@ app.post("/analytics/form", upload.single("file"), (req, res) => {
 //Get to same
 app.get("/analytics/form", async (req, res) => {
   try {
-    const response = await axios.get("http://localhost:4000/showData");
+    const response = await axios.get("http://localhost:4000/show/test");
     const data = response.data;
     // console.log(data.size); //To test api conn
 
