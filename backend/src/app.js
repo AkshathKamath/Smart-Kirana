@@ -47,7 +47,7 @@ app.get("/home", (req, res) => {
 //-----------------------------------------------------//
 
 //Form to select option of analytics
-app.post("/analyticsForm", upload.single("file"), (req, res) => {
+app.post("/analytics/form", upload.single("file"), (req, res) => {
   try {
     console.log("File upload successful!");
     const data = null;
@@ -61,7 +61,7 @@ app.post("/analyticsForm", upload.single("file"), (req, res) => {
 //-----------------------------------------------------//
 
 //Get to same
-app.get("/analyticsForm", async (req, res) => {
+app.get("/analytics/form", async (req, res) => {
   try {
     const response = await axios.get("http://localhost:4000/showData");
     const data = response.data;
