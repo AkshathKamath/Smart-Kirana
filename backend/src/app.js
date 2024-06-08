@@ -77,4 +77,23 @@ app.get("/analytics/form", async (req, res) => {
 
 //-----------------------------------------------------//
 
+//Handling Errors
+app.use((req, res, next) => {
+  res.status(404).render("handle_errors", {
+    status: 404,
+    message: "Page Not Found",
+    error:
+      "The page you are looking for does not exist! Please enter a valid URL.",
+  });
+});
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).render("handle_errors", {
+    status: 500,
+    message: "Internal Server Error",
+    error: err.message,
+  });
+});
+
 module.exports = app;
