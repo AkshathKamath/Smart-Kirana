@@ -8,6 +8,7 @@ app = Flask(__name__)
 
 #-------------------------------------------------------#
 
+#To test api
 @app.route('/show/test', methods=['GET'])
 def show_data():
     data_size = data_cleaner(file_path).shape[0]
