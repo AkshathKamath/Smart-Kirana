@@ -8,7 +8,7 @@ const axios = require("axios");
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-//Storing the file
+//Storing the file locally (Ideally replace this with AWS S3 api call)
 const uploadsDir = path.join(__dirname, "../..", "dataset");
 
 const storage = multer.diskStorage({
@@ -25,7 +25,17 @@ const upload = multer({ storage: storage });
 // Routes
 //-----------------------------------------------------//
 
+// Root path
 app.get("/", (req, res) => {
+  try {
+    res.redirect("/home");
+  } catch (err) {
+    console.error("Error rendering home page!", err);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+app.get("/home", (req, res) => {
   try {
     res.render("data_upload");
   } catch (err) {
@@ -36,6 +46,7 @@ app.get("/", (req, res) => {
 
 //-----------------------------------------------------//
 
+//Form to select option of analytics
 app.post("/analyticsForm", upload.single("file"), (req, res) => {
   try {
     console.log("File upload successful!");
@@ -49,6 +60,7 @@ app.post("/analyticsForm", upload.single("file"), (req, res) => {
 
 //-----------------------------------------------------//
 
+//Get to same
 app.get("/analyticsForm", async (req, res) => {
   try {
     const response = await axios.get("http://localhost:4000/showData");
