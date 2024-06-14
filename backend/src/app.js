@@ -8,14 +8,13 @@ app.set("views", path.join(__dirname, "views"));
 
 //--------------------Routes-------------------------//
 
+//Importing Routes
 const homeRouter = require("./routes/home");
 const formRouter = require("./routes/analytics_form");
 
-// Root path
-app.use("/", homeRouter);
-app.use("/analytics/form", formRouter);
-
-//General analytics and form path
+//Using Routes
+app.use("/", homeRouter); // Root path
+app.use("/analytics/form", formRouter); //General analytics and form path
 
 //--------------------Routes-------------------------//
 
