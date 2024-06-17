@@ -11,7 +11,7 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
+            <a class="navbar-brand" href="/home">StoreSmart</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -19,33 +19,12 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" aria-current="page" href="/home">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
+                        <a class="nav-link" href="/analytics/form">Analytics</a>
                     </li>
-                    <!-- <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                Dropdown
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </li> -->
-                    <!-- <li class="nav-item">
-                            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-                        </li> -->
                 </ul>
-                <!-- <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form> -->
             </div>
         </div>
     </nav>
@@ -57,18 +36,18 @@
     <br>
     <div class="container">
         <form action="/show_analytics" method="post" align="center">
-            <label for="opt">
-                <h5>Select an option:</h5>
-            </label>
-            <!-- <br> -->
+            <label for="opt" class="form-label">Choose Required analysis: </label>
             <select class="form-select" name="opt" id="opt">
-                <!-- <option selected>Choose an option</option> -->
                 <option value="fin" selected>Financial Overview</option>
 
             </select>
             <br />
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
+    </div>
+    <div class="container">
+        <h4>Viewing General Analytics:</h4>
+        <img src="/images/financials.png" alt="Unable to show img!">
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

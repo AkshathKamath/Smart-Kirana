@@ -2,3 +2,4 @@ Arch.png
 **/__pycache__/
 /dataset
 **/node_modules
+**/images

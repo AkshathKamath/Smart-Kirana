@@ -6,6 +6,9 @@ const path = require("path");
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
+//Serving images (temporary)
+app.use(express.static(path.join(__dirname, "../public")));
+
 //--------------------Routes-------------------------//
 
 //Importing Routes

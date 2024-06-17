@@ -37,7 +37,7 @@ month_dict={'01': 'Jan',
     '12': 'Dec'}
 
 ## -------Cleaner----------
-def data_cleaner(file_path):
+def data_cleaner_saver(file_path):
     df=pd.read_csv(file_path)
     # print(df.iloc[0,11])
     df['Time Slot']=df['Time'].str.split(':').str[0].apply(helper_func_1)

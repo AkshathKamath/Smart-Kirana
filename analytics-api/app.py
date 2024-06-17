@@ -1,18 +1,27 @@
 from config import file_path
 import os
 from flask import Flask,render_template,request,jsonify
-from analytics.data_cleaning import data_cleaner
+from analytics.data_cleaning import data_cleaner_saver
 import pandas as pd
+from analytics.general_analytics import generate_finance_img
 
 app = Flask(__name__)
 
 #-------------------------------------------------------#
 
 #To test api
-@app.route('/show/test', methods=['GET'])
+@app.route('/show/clean', methods=['GET'])
 def show_data():
-    data_size = data_cleaner(file_path).shape[0]
-    data_json = {"size":data_size}
+    data_cleaner_saver(file_path)
+    return {"msg":"Data cleaned and saved!"}
+
+#-------------------------------------------------------#
+
+@app.route('/show/general', methods=['GET'])
+def general_analytics():
+    data_size = data_cleaner_saver(file_path).shape[0]
+    # generate_finance_img(data_cleaner(file_path))
+    data_json = {"size":data_size, "msg":"Image upload successful!"}
     return jsonify(data_json)
 
 #-------------------------------------------------------#
