@@ -3,7 +3,7 @@ import os
 from flask import Flask,render_template,request,jsonify
 from analytics.data_cleaning_saving import data_cleaner_saver
 import pandas as pd
-from analytics.general_analytics import generate_finance_img
+from analytics.financial_analysis import generate_finance_img
 
 app = Flask(__name__)
 
