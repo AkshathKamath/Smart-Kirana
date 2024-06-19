@@ -12,5 +12,3 @@ def generate_finance_img(df):
     plt.legend(loc=1)
     fig.savefig('.././Main-Project/images/financials.png') #Ideally store to AWS s3
     plt.close(fig)
-    # city=df.groupby(['Suburb'])['net profit'].sum().index[0]
-    # return city
