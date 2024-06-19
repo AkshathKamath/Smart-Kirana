@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 #-------------------------------------------------------#
 
-#To test api
+#To clean the i/p data
 @app.route('/show/clean', methods=['GET'])
 def show_data():
     data_cleaner_saver(file_path)
