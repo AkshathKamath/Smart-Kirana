@@ -1,9 +1,10 @@
 from config import file_path
 import os
-from flask import Flask,render_template,request,jsonify
-from analytics.data_cleaning_saving import data_cleaner_saver
+from flask import Flask,render_template,request,jsonify,json
 import pandas as pd
-from analytics.financial_analysis import generate_finance_img
+from analytics.data_cleaning_saving import data_cleaner_saver
+from analytics.general_overview import gen_overview_1
+from analytics.financial_analysis import generate_finance_img_1
 
 app = Flask(__name__)
 
@@ -19,9 +20,16 @@ def show_data():
 
 @app.route('/show/general', methods=['GET'])
 def general_analytics():
-    data_size = data_cleaner_saver(file_path).shape[0]
+    df = data_cleaner_saver(file_path)
+    data_size = df.shape[0]
+    gen_1 = {"size": data_size}
+    # gen_2 = json.loads(gen_overview_1(df))
+    gen_2 = gen_overview_1(df)
+    # print(gen_2)
     # generate_finance_img(data_cleaner(file_path))
-    data_json = {"size":data_size, }
+
+    # data_json = {**gen_1, **gen_2}
+    data_json = gen_2
     return jsonify(data_json)
 
 #-------------------------------------------------------#

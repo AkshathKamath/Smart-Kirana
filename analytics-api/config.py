@@ -1,1 +1,1 @@
-file_path = '../dataset/supermarket.csv'
+file_path = './dataset/supermarket.csv'
