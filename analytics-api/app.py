@@ -12,7 +12,7 @@ app = Flask(__name__)
 
 #To clean the i/p data
 @app.route('/show/clean', methods=['GET'])
-def show_data():
+def save_data():
     data_cleaner_saver(file_path)
     return {"msg":"Data cleaned and saved!"}
 
@@ -21,19 +21,24 @@ def show_data():
 @app.route('/show/general', methods=['GET'])
 def general_analytics():
     df = data_cleaner_saver(file_path)
-    data_size = df.shape[0]
-    gen_1 = {"size": data_size}
-    # gen_2 = json.loads(gen_overview_1(df))
-    gen_2 = gen_overview_1(df)
-    # print(gen_2)
-    # generate_finance_img(data_cleaner(file_path))
+    gen_1 = gen_overview_1(df)
 
-    # data_json = {**gen_1, **gen_2}
-    data_json = gen_2
+    data_json = gen_1
     return jsonify(data_json)
 
 #-------------------------------------------------------#
 
+@app.route('/show/size', methods=['GET'])
+def show_size():
+    df = data_cleaner_saver(file_path)
+    data_size = df.shape[0]
+    gen_1 = {"size": data_size}
+
+    data_json = gen_1
+    return jsonify(data_json)
+
+
+#-------------------------------------------------------#
 
 @app.errorhandler(500)
 def internal_error(error):

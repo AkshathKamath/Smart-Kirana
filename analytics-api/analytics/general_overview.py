@@ -8,6 +8,15 @@ def gen_overview_1(df):
     df = df.loc[:, ~df.columns.duplicated(keep='first')]
     df=df.rename(columns={'Total amount with Tax':'TotalAmountWithTax','Tax 5%':'Tax','net profit':'NetProfit','Customer Rating':'CustomerRating'})
     df['CustomerRating'] = df['CustomerRating'].round(2)
+    
+    df['TotalAmountWithTax']=df['TotalAmountWithTax'].astype(int)
+    df['Tax']=df['Tax'].astype(int)
+    df['NetProfit']=df['NetProfit'].astype(int)
+
+    df['TotalAmountWithTax']=df['TotalAmountWithTax'].apply(lambda x: '{:,.2f}'.format(x))
+    df['Tax']=df['Tax'].apply(lambda x: '{:,.2f}'.format(x))
+    df['NetProfit']=df['NetProfit'].apply(lambda x: '{:,.2f}'.format(x))
+    
     return df.to_json(orient='records')
     
 
