@@ -28,7 +28,7 @@ router.get("/", async (req, res) => {
       ...data2,
       list: data1,
     };
-    console.log(data);
+    // console.log(data);
     // console.log(size);
     // console.log(Array.isArray(data)); //To test api conn
 
