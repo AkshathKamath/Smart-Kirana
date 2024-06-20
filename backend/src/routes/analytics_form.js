@@ -20,13 +20,17 @@ router.post("/", async (req, res) => {
 //Get req
 router.get("/", async (req, res) => {
   try {
-    const response1 = await axios.get("http://localhost:4000/show/general");
+    const response1 = await axios.get("http://localhost:4000/show/general/1");
     const data1 = JSON.parse(response1.data);
     const response2 = await axios.get("http://localhost:4000/show/size");
     const data2 = response2.data;
+    const response3 = await axios.get("http://localhost:4000/show/general/2");
+    const data3 = JSON.parse(response3.data);
+    // console.log(data3);
     const data = {
       ...data2,
-      list: data1,
+      list1: data1,
+      list2: data3,
     };
     // console.log(data);
     // console.log(size);

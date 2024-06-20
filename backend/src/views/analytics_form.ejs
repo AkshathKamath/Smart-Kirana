@@ -67,7 +67,7 @@
                 </tr>
             </thead>
             <tbody class="table-group-divider">
-                 <% data.list.forEach((obj,index) => { %>
+                 <% data.list1.forEach((obj,index) => { %>
                     <tr>
                         <th scope="row"> <%= index+1 %> </th>
                         <td> <%= obj.Suburb %> </td>
@@ -77,6 +77,39 @@
                         <td> <%= (obj.CustomerRating) %> </td>
                     </tr>
                <% }); %>
+        </table>
+        <br/>
+        <img src="/images/general/general_1.png" alt="Unable to show image">
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">S No.</th>
+                    <th scope="col">Product Category</th>
+                    <th scope="col">Units Sold</th>
+                    <th scope="col">Cost of Goods($)</th>
+                    <th scope="col">Gross Margin(%)</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                <% data.list2.forEach((obj,index)=> { %>
+                    <tr>
+                        <th scope="row">
+                            <%= index+1 %>
+                        </th>
+                        <td>
+                            <%= obj.Product %>
+                        </td>
+                        <td>
+                            <%= (obj.Quantity) %>
+                        </td>
+                        <td>
+                            <%= (obj.cogs) %>
+                        </td>
+                        <td>
+                            <%= (obj.gmp) %>
+                        </td>
+                    </tr>
+                    <% }); %>
         </table>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

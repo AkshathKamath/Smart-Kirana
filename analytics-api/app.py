@@ -3,7 +3,7 @@ import os
 from flask import Flask,render_template,request,jsonify,json
 import pandas as pd
 from analytics.data_cleaning_saving import data_cleaner_saver
-from analytics.general_overview import gen_overview_1
+from analytics.general_overview import gen_overview_1, gen_overview_2, gen_overview_img
 from analytics.financial_analysis import generate_finance_img_1
 
 app = Flask(__name__)
@@ -18,12 +18,23 @@ def save_data():
 
 #-------------------------------------------------------#
 
-@app.route('/show/general', methods=['GET'])
-def general_analytics():
+@app.route('/show/general/1', methods=['GET'])
+def general_analytics_1():
     df = data_cleaner_saver(file_path)
     gen_1 = gen_overview_1(df)
+    gen_overview_img(df)
 
     data_json = gen_1
+    return jsonify(data_json)
+
+#-------------------------------------------------------#
+
+@app.route('/show/general/2', methods=['GET'])
+def general_analytics_2():
+    df = data_cleaner_saver(file_path)
+    gen_2 = gen_overview_2(df)
+
+    data_json = gen_2
     return jsonify(data_json)
 
 #-------------------------------------------------------#

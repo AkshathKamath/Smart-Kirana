@@ -10,5 +10,5 @@ def generate_finance_img_1(df):
     ax = sns.barplot(x="Suburb", y="gross profit", color='lime', saturation=0.5, data=df, errorbar=None, estimator=sum, label='Gross Profit')
     ax.set(xlabel="Suburbs", ylabel="Financial Parameters")
     plt.legend(loc=1)
-    fig.savefig('.././Main-Project/images/financials.png') #Ideally store to AWS s3
+    fig.savefig('.././Main-Project/backend/public/images/financials/financials.png') #Ideally store to AWS s3
     plt.close(fig)
