@@ -21,7 +21,15 @@ router.post("/", async (req, res) => {
 router.get("/", async (req, res) => {
   try {
     const response1 = await axios.get("http://localhost:4000/show/general");
-    const data = JSON.parse(response1.data);
+    const data1 = JSON.parse(response1.data);
+    const response2 = await axios.get("http://localhost:4000/show/size");
+    const data2 = response2.data;
+    const data = {
+      ...data2,
+      list: data1,
+    };
+    console.log(data);
+    // console.log(size);
     // console.log(Array.isArray(data)); //To test api conn
 
     console.log("API connection success!");
