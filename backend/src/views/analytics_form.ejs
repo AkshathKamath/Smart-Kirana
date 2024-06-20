@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-dark bg-primary">
         <div class="container-fluid">
             <a class="navbar-brand" href="/home">StoreSmart</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -55,6 +55,7 @@
         <h4>Viewing General Overview:</h4>
         <!-- <img src="/images/financials.png" alt="Unable to show img!"> -->
          <br />
+         <h5>Financial Overview</h5>
         <table class="table table-hover table-bordered">
             <thead>
                 <tr>
@@ -79,7 +80,37 @@
                <% }); %>
         </table>
         <br/>
+        <h5>Customers Overview</h5>
         <img src="/images/general/general_1.png" alt="Unable to show image">
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">S No.</th>
+                    <th scope="col">Customer Type</th>
+                    <th scope="col">Count</th>
+                    <th scope="col">Total Revenue($)</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                <% data.list3.forEach((obj,index)=> { %>
+                    <tr>
+                        <th scope="row">
+                            <%= index+1 %>
+                        </th>
+                        <td>
+                            <%= obj.Ctype %>
+                        </td>
+                        <td>
+                            <%= (obj.count) %>
+                        </td>
+                        <td>
+                            <%= (obj.TotalAmountWithTax) %>
+                        </td>
+                    </tr>
+                    <% }); %>
+        </table>
+        <br />
+        <h5>Products Overview</h5>
         <table class="table table-hover table-bordered">
             <thead>
                 <tr>

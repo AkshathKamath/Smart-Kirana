@@ -26,11 +26,14 @@ router.get("/", async (req, res) => {
     const data2 = response2.data;
     const response3 = await axios.get("http://localhost:4000/show/general/2");
     const data3 = JSON.parse(response3.data);
-    // console.log(data3);
+    const response4 = await axios.get("http://localhost:4000/show/general/3");
+    const data4 = JSON.parse(response4.data);
+    console.log(data4);
     const data = {
       ...data2,
       list1: data1,
       list2: data3,
+      list3: data4,
     };
     // console.log(data);
     // console.log(size);

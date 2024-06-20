@@ -31,6 +31,17 @@ def gen_overview_2(df):
 
     return df.to_json(orient='records')
 
+def gen_overview_3(df):
+    df=pd.concat([df['Customer type'].value_counts().reset_index(),df.groupby('Customer type')['Total amount with Tax'].sum().reset_index()],axis=1)
+    df = df.loc[:, ~df.columns.duplicated(keep='first')]
+    df=df.rename(columns={'Customer type':'Ctype','Total amount with Tax':'TotalAmountWithTax'})
+
+    df['TotalAmountWithTax']=df['TotalAmountWithTax'].astype(int)
+
+    df['TotalAmountWithTax']=df['TotalAmountWithTax'].apply(lambda x: '{:,.2f}'.format(x))
+
+    return df.to_json(orient='records')
+
 def gen_overview_img(df):
     fig = plt.figure(figsize=(4,6))
     ax=sns.countplot(x='Customer type',hue='Suburb',palette=['#89CFF0', '#6CB4EE', '#002D62'],data=df)
