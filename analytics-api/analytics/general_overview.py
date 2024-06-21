@@ -44,7 +44,7 @@ def gen_overview_3(df):
 
 def gen_overview_img(df):
     fig = plt.figure(figsize=(4,6))
-    ax=sns.countplot(x='Customer type',hue='Suburb',palette=['#89CFF0', '#6CB4EE', '#002D62'],data=df)
+    ax=sns.countplot(x='Customer type',hue='Suburb',palette=['#89CFF0', '#0000FF', '#0066b2'],data=df)
     ax.set(xlabel="Customer Type", ylabel="Count")
     plt.legend(loc=8)
     fig.savefig('.././Main-Project/backend/public/images/general/general_1.png') #Ideally store to AWS s3
