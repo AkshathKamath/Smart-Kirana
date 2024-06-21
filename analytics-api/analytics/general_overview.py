@@ -32,13 +32,11 @@ def gen_overview_2(df):
     return df.to_json(orient='records')
 
 def gen_overview_3(df):
-    df=pd.concat([df['Customer type'].value_counts().reset_index(),df.groupby('Customer type')['Total amount with Tax'].sum().reset_index()],axis=1)
+    df=pd.concat([df['Customer type'].value_counts().reset_index(),df.groupby('Customer type')['Customer Rating'].mean().reset_index()],axis=1)
     df = df.loc[:, ~df.columns.duplicated(keep='first')]
-    df=df.rename(columns={'Customer type':'Ctype','Total amount with Tax':'TotalAmountWithTax'})
+    df=df.rename(columns={'Customer type':'Ctype','Customer Rating':'CustomerRating'})
 
-    df['TotalAmountWithTax']=df['TotalAmountWithTax'].astype(int)
-
-    df['TotalAmountWithTax']=df['TotalAmountWithTax'].apply(lambda x: '{:,.2f}'.format(x))
+    df['CustomerRating'] = df['CustomerRating'].round(2)
 
     return df.to_json(orient='records')
 

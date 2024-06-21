@@ -88,7 +88,7 @@
                     <th scope="col">S No.</th>
                     <th scope="col">Customer Type</th>
                     <th scope="col">Count</th>
-                    <th scope="col">Total Revenue($)</th>
+                    <th scope="col">Avg. Customer Rating</th>
                 </tr>
             </thead>
             <tbody class="table-group-divider">
@@ -104,7 +104,7 @@
                             <%= (obj.count) %>
                         </td>
                         <td>
-                            <%= (obj.TotalAmountWithTax) %>
+                            <%= (obj.CustomerRating) %>
                         </td>
                     </tr>
                     <% }); %>
