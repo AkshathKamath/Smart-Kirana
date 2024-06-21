@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const axios = require("axios");
 
 //Home route
 router.get("/", (req, res) => {
@@ -11,9 +12,13 @@ router.get("/", (req, res) => {
   }
 });
 
-router.get("/home", (req, res) => {
+router.get("/home", async (req, res) => {
   try {
-    res.render("home");
+    const response = await axios.get("http://localhost:4000/show/check");
+    const data = response.data;
+    // data = { data };
+    // console.log(data.msg);
+    res.render("home", { data });
   } catch (err) {
     console.error("Error rendering home page!", err);
     res.status(500).send("Internal Server Error");

@@ -5,9 +5,18 @@ import pandas as pd
 from data.data_cleaning_saving import data_cleaner_saver
 from data.data_extracting import data_extractor
 from data.data_deleting import data_deleter
+from data.data_exist_checking import data_checker
 from analytics.general_overview import gen_overview_1, gen_overview_2, gen_overview_3,gen_overview_img
 
 app = Flask(__name__)
+
+#-------------------------------------------------------#
+
+#To check if data exists
+@app.route('/show/check', methods=['GET'])
+def check_data():
+    ct= data_checker()
+    return jsonify({"msg":ct})
 
 #-------------------------------------------------------#
 
