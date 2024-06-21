@@ -2,9 +2,8 @@ from config import file_path
 import os
 from flask import Flask,render_template,request,jsonify,json
 import pandas as pd
-from analytics.data_cleaning_saving import data_cleaner_saver
+from data.data_cleaning_saving import data_cleaner_saver
 from analytics.general_overview import gen_overview_1, gen_overview_2, gen_overview_3,gen_overview_img
-from analytics.financial_analysis import generate_finance_img_1
 
 app = Flask(__name__)
 

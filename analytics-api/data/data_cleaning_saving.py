@@ -1,4 +1,5 @@
 import pandas as pd
+from pymongo import MongoClient
 
 ## Helper funcs & dicts
 def helper_func_1(x):
@@ -36,7 +37,7 @@ month_dict={'01': 'Jan',
     '11': 'Nov',
     '12': 'Dec'}
 
-## -------Cleaner----------
+## -------Cleaner and Saver to Mongo Atlas----------
 def data_cleaner_saver(file_path):
     df=pd.read_csv(file_path)
     # print(df.iloc[0,11])
