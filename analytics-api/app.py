@@ -3,6 +3,8 @@ import os
 from flask import Flask,render_template,request,jsonify,json
 import pandas as pd
 from data.data_cleaning_saving import data_cleaner_saver
+from data.data_extracting import data_extractor
+from data.data_deleting import data_deleter
 from analytics.general_overview import gen_overview_1, gen_overview_2, gen_overview_3,gen_overview_img
 
 app = Flask(__name__)
@@ -12,17 +14,17 @@ app = Flask(__name__)
 #To clean the i/p data
 @app.route('/show/clean', methods=['GET'])
 def save_data():
-    data_cleaner_saver(file_path)
-    return {"msg":"Data cleaned and saved!"}
+    data_deleter()
+    msg  = data_cleaner_saver(file_path)
+    return msg
 
 #-------------------------------------------------------#
 
 @app.route('/show/general/1', methods=['GET'])
 def general_analytics_1():
-    df = data_cleaner_saver(file_path)
+    df = data_extractor()
     gen_1 = gen_overview_1(df)
     
-
     data_json = gen_1
     return jsonify(data_json)
 
@@ -30,7 +32,7 @@ def general_analytics_1():
 
 @app.route('/show/general/2', methods=['GET'])
 def general_analytics_2():
-    df = data_cleaner_saver(file_path)
+    df = data_extractor()
     gen_2 = gen_overview_2(df)
 
     data_json = gen_2
@@ -40,7 +42,7 @@ def general_analytics_2():
 
 @app.route('/show/general/3', methods=['GET'])
 def general_analytics_3():
-    df = data_cleaner_saver(file_path)
+    df = data_extractor()
     gen_overview_img(df)
     gen_3 = gen_overview_3(df)
 
@@ -51,7 +53,7 @@ def general_analytics_3():
 
 @app.route('/show/size', methods=['GET'])
 def show_size():
-    df = data_cleaner_saver(file_path)
+    df = data_extractor()
     data_size = df.shape[0]
     gen_1 = {"size": data_size}
 

@@ -40,7 +40,7 @@ month_dict={'01': 'Jan',
 ## -------Cleaner and Saver to Mongo Atlas----------
 def data_cleaner_saver(file_path):
     df=pd.read_csv(file_path)
-    # print(df.iloc[0,11])
+    
     df['Time Slot']=df['Time'].str.split(':').str[0].apply(helper_func_1)
     df['Date'] = pd.to_datetime(df['Date'], format = '%m/%d/%Y')
     df['Month']=df['Date'].dt.strftime('%m')
@@ -48,5 +48,13 @@ def data_cleaner_saver(file_path):
     df['Month']=df['Month'].map(month_dict)
     df['Week of Month']=df['Date'].apply(helper_func_2)
     df.drop(columns=['Unnamed: 0','Invoice ID','Time','Date'],inplace=True)
-    # print(df.head())
-    return df
+
+    client=MongoClient('mongodb+srv://akshathkamath:akshath@storesmartcluster.ainagbr.mongodb.net/?retryWrites=true&w=majority&appName=StoreSmartCluster')
+    db=client['StoreSmartDatabase']
+    collection=db['StoreSmartCollection']
+    inserted_doc = collection.insert_many(df.to_dict(orient='records'))
+    # print(df.to_dict(orient='records'))
+    # print(inserted_doc.inserted_id)
+    client.close()
+    
+    return {"msg":"Data uploaded to MongoDB successfully"}
