@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const path = require("path");
+const bodyParser = require("body-parser");
 
 //Setting views dir
 app.set("view engine", "ejs");
@@ -9,15 +10,20 @@ app.set("views", path.join(__dirname, "views"));
 //Serving images (temporary)
 app.use(express.static(path.join(__dirname, "../public")));
 
+//To parse url encoded form data
+app.use(express.urlencoded({ extended: true }));
+
 //--------------------Routes-------------------------//
 
 //Importing Routes
 const homeRouter = require("./routes/home");
 const formRouter = require("./routes/analytics_form");
+const analyticsRouter = require("./routes/analytics_handling");
 
 //Using Routes
 app.use("/", homeRouter); // Root path
 app.use("/analytics/form", formRouter); //General analytics and form path
+app.use("/analytics", analyticsRouter); //To handle form submission
 
 //--------------------Routes-------------------------//
 
