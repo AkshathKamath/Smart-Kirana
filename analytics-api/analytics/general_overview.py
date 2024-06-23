@@ -40,12 +40,22 @@ def gen_overview_3(df):
 
     return df.to_json(orient='records')
 
-def gen_overview_img(df):
+def gen_overview_img_1(df):
+    fig = plt.figure(figsize=(3.5,8))
+    ax = sns.barplot(x="Suburb", y="Total amount with Tax", color='#0000FF',saturation=0.5, data=df, errorbar=None, estimator=sum, label='Total Revenue')
+    ax = sns.barplot(x="Suburb", y="cogs", color='#007FFF', saturation=0.2, data=df, errorbar=None, estimator=sum, label='Cost of goods')
+    ax = sns.barplot(x="Suburb", y="gross profit", color='#89CFF0', saturation=0.5, data=df, errorbar=None, estimator=sum, label='Gross Profit')
+    ax.set(xlabel="Suburbs", ylabel="Financial Parameters")
+    plt.legend(loc=3)
+    fig.savefig('.././Main-Project/backend/public/images/general/general_1.png') #Ideally store to AWS s3
+    plt.close(fig)
+
+def gen_overview_img_2(df):
     fig = plt.figure(figsize=(4,6))
     ax=sns.countplot(x='Customer type',hue='Suburb',palette=['#89CFF0', '#0000FF', '#0066b2'],data=df)
     ax.set(xlabel="Customer Type", ylabel="Count")
     plt.legend(loc=8)
-    fig.savefig('.././Main-Project/backend/public/images/general/general_1.png') #Ideally store to AWS s3
+    fig.savefig('.././Main-Project/backend/public/images/general/general_2.png') #Ideally store to AWS s3
     plt.close(fig)
     
 

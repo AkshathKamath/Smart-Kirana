@@ -6,7 +6,7 @@ from data.data_cleaning_saving import data_cleaner_saver
 from data.data_extracting import data_extractor
 from data.data_deleting import data_deleter
 from data.data_exist_checking import data_checker
-from analytics.general_overview import gen_overview_1, gen_overview_2, gen_overview_3,gen_overview_img
+from analytics.general_overview import gen_overview_1, gen_overview_2, gen_overview_3,gen_overview_img_1, gen_overview_img_2
 
 app = Flask(__name__)
 
@@ -32,6 +32,7 @@ def save_data():
 @app.route('/show/general/1', methods=['GET'])
 def general_analytics_1():
     df = data_extractor()
+    gen_overview_img_1(df)
     gen_1 = gen_overview_1(df)
     
     data_json = gen_1
@@ -52,7 +53,7 @@ def general_analytics_2():
 @app.route('/show/general/3', methods=['GET'])
 def general_analytics_3():
     df = data_extractor()
-    gen_overview_img(df)
+    gen_overview_img_2(df)
     gen_3 = gen_overview_3(df)
 
     data_json = gen_3
