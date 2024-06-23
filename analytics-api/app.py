@@ -6,7 +6,7 @@ from data.data_cleaning_saving import data_cleaner_saver
 from data.data_extracting import data_extractor
 from data.data_deleting import data_deleter
 from data.data_exist_checking import data_checker
-from analytics.general_overview import gen_overview_1, gen_overview_2, gen_overview_3,gen_overview_img_1, gen_overview_img_2
+from analytics.general_overview import gen_overview_1, gen_overview_2, gen_overview_3,gen_overview_img_1, gen_overview_img_2, gen_overview_img_3
 
 app = Flask(__name__)
 
@@ -20,6 +20,16 @@ def check_data():
 
 #-------------------------------------------------------#
 
+@app.route('/show/size', methods=['GET'])
+def show_size():
+    df = data_extractor()
+    data_size = df.shape[0]
+    gen_1 = {"size": data_size}
+
+    data_json = gen_1
+    return jsonify(data_json)
+
+#-------------------------------------------------------#
 #To clean the i/p data
 @app.route('/show/clean', methods=['GET'])
 def save_data():
@@ -43,6 +53,7 @@ def general_analytics_1():
 @app.route('/show/general/2', methods=['GET'])
 def general_analytics_2():
     df = data_extractor()
+    gen_overview_img_2(df)
     gen_2 = gen_overview_2(df)
 
     data_json = gen_2
@@ -53,7 +64,7 @@ def general_analytics_2():
 @app.route('/show/general/3', methods=['GET'])
 def general_analytics_3():
     df = data_extractor()
-    gen_overview_img_2(df)
+    gen_overview_img_3(df)
     gen_3 = gen_overview_3(df)
 
     data_json = gen_3
@@ -61,17 +72,6 @@ def general_analytics_3():
 
 #-------------------------------------------------------#
 
-@app.route('/show/size', methods=['GET'])
-def show_size():
-    df = data_extractor()
-    data_size = df.shape[0]
-    gen_1 = {"size": data_size}
-
-    data_json = gen_1
-    return jsonify(data_json)
-
-
-#-------------------------------------------------------#
 
 @app.errorhandler(500)
 def internal_error(error):
