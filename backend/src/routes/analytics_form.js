@@ -20,24 +20,21 @@ router.post("/", async (req, res) => {
 //Get req
 router.get("/", async (req, res) => {
   try {
-    const response1 = await axios.get("http://localhost:4000/show/general/1");
-    const data1 = JSON.parse(response1.data);
-    const response2 = await axios.get("http://localhost:4000/show/size");
-    const data2 = response2.data;
+    const response1 = await axios.get("http://localhost:4000/show/size");
+    const data1 = response1.data;
+    const response2 = await axios.get("http://localhost:4000/show/general/1");
+    const data2 = JSON.parse(response2.data);
     const response3 = await axios.get("http://localhost:4000/show/general/2");
     const data3 = JSON.parse(response3.data);
     const response4 = await axios.get("http://localhost:4000/show/general/3");
     const data4 = JSON.parse(response4.data);
-    // console.log(data4);
+
     const data = {
-      ...data2,
-      list1: data1,
+      ...data1,
+      list1: data2,
       list2: data3,
       list3: data4,
     };
-    // console.log(data);
-    // console.log(size);
-    // console.log(Array.isArray(data)); //To test api conn
 
     console.log("API connection success!");
     res.render("analytics_form", { data });
