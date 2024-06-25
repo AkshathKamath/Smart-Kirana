@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 
 def aws_img_saver(image_buffer, s3_file):
     load_dotenv()
+    
     AWS_ACCESS_KEY = os.getenv('AWS_ACCESS_KEY')
     AWS_SECRET_KEY = os.getenv('AWS_SECRET_KEY')
     AWS_S3_BUCKET_NAME = os.getenv('AWS_S3_BUCKET_NAME')

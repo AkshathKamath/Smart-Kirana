@@ -1,5 +1,7 @@
+import os
 import pandas as pd
 from pymongo import MongoClient
+from dotenv import load_dotenv
 
 ## Helper funcs & dicts
 def helper_func_1(x):
@@ -49,12 +51,18 @@ def data_cleaner_saver(file_path):
     df['Week of Month']=df['Date'].apply(helper_func_2)
     df.drop(columns=['Unnamed: 0','Invoice ID','Time','Date'],inplace=True)
 
-    client=MongoClient('mongodb+srv://akshathkamath:akshath@storesmartcluster.ainagbr.mongodb.net/?retryWrites=true&w=majority&appName=StoreSmartCluster')
-    db=client['StoreSmartDatabase']
-    collection=db['StoreSmartCollection']
+    load_dotenv()
+
+    MONGO_URL = os.getenv('MONGO_URL')
+    DB_NAME = os.getenv('DB_NAME')
+    COLLECTION_NAME = os.getenv('COLLECTION_NAME')
+
+    client=MongoClient(MONGO_URL)
+    db=client[DB_NAME]
+    collection=db[COLLECTION_NAME]
+
     inserted_doc = collection.insert_many(df.to_dict(orient='records'))
-    # print(df.to_dict(orient='records'))
-    # print(inserted_doc.inserted_id)
+    
     client.close()
     
     return {"msg":"Data uploaded to MongoDB successfully"}
