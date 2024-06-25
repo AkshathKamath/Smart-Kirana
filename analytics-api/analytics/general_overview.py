@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+import io
 
 def gen_overview_1(df):
     df = pd.concat([df.groupby('Suburb')[['Total amount with Tax','Tax 5%', 'net profit']].sum().reset_index(), df.groupby('Suburb')['Customer Rating'].mean().reset_index()], axis=1)
@@ -47,26 +48,38 @@ def gen_overview_img_1(df):
     ax = sns.barplot(x="Suburb", y="gross profit", color='#89CFF0', saturation=0.5, data=df, errorbar=None, estimator=sum, label='Gross Profit')
     ax.set(xlabel="Suburbs", ylabel="Financial Parameters")
     plt.legend(loc=3)
-    fig.savefig('.././Main-Project/backend/public/images/general/general_1.png') #Ideally store to AWS s3
+    # fig.savefig('.././Main-Project/backend/public/images/general/general_1.png') #Ideally store to AWS s3
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png')
+    buf.seek(0)
     plt.close(fig)
+    return buf
+
 
 def gen_overview_img_2(df):
+    fig = plt.figure(figsize=(4,6))
+    ax=sns.countplot(x='Customer type',hue='Suburb',palette=['#89CFF0', '#0000FF', '#0066b2'],data=df)
+    ax.set(xlabel="Customer Type", ylabel="Count")
+    plt.legend(loc=8)
+    # fig.savefig('.././Main-Project/backend/public/images/general/general_3.png') #Ideally store to AWS s3
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png')
+    buf.seek(0)
+    plt.close(fig)
+    return buf
+    
+def gen_overview_img_3(df):
     pie_df=df.groupby('Product line')['Quantity'].sum().reset_index()
     # sns.set(style="whitegrid")
     fig = plt.figure(figsize=(5,3))
     plt.pie(pie_df['Quantity'], labels=pie_df['Product line'], autopct='%1.1f%%', startangle=140, colors=['#7CB9E8','#318CE7','#72A0C1','#007FFF','#89CFF0','#0000FF'])
     plt.title('Product category units sold Breakdown')
-    fig.savefig('.././Main-Project/backend/public/images/general/general_2.png') #Ideally store to AWS s3
+    # fig.savefig('.././Main-Project/backend/public/images/general/general_2.png') #Ideally store to AWS s3
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png')
+    buf.seek(0)
     plt.close(fig)
-
-def gen_overview_img_3(df):
-    fig = plt.figure(figsize=(4,6))
-    ax=sns.countplot(x='Customer type',hue='Suburb',palette=['#89CFF0', '#0000FF', '#0066b2'],data=df)
-    ax.set(xlabel="Customer Type", ylabel="Count")
-    plt.legend(loc=8)
-    fig.savefig('.././Main-Project/backend/public/images/general/general_3.png') #Ideally store to AWS s3
-    plt.close(fig)
-    
+    return buf
 
 
 

@@ -7,6 +7,7 @@ from data.data_extracting import data_extractor
 from data.data_deleting import data_deleter
 from data.data_exist_checking import data_checker
 from analytics.general_overview import gen_overview_1, gen_overview_2, gen_overview_3,gen_overview_img_1, gen_overview_img_2, gen_overview_img_3
+from aws_handling import aws_img_saver
 
 app = Flask(__name__)
 
@@ -42,7 +43,8 @@ def save_data():
 @app.route('/show/general/1', methods=['GET'])
 def general_analytics_1():
     df = data_extractor()
-    gen_overview_img_1(df)
+    img_buffer = gen_overview_img_1(df)
+    aws_img_saver(img_buffer, 'general_1.png')
     gen_1 = gen_overview_1(df)
     
     data_json = gen_1
@@ -53,7 +55,8 @@ def general_analytics_1():
 @app.route('/show/general/2', methods=['GET'])
 def general_analytics_2():
     df = data_extractor()
-    gen_overview_img_2(df)
+    img_buffer = gen_overview_img_2(df)
+    aws_img_saver(img_buffer, 'general_2.png')
     gen_2 = gen_overview_2(df)
 
     data_json = gen_2
@@ -64,7 +67,8 @@ def general_analytics_2():
 @app.route('/show/general/3', methods=['GET'])
 def general_analytics_3():
     df = data_extractor()
-    gen_overview_img_3(df)
+    img_buffer = gen_overview_img_3(df)
+    aws_img_saver(img_buffer, 'general_3.png')
     gen_3 = gen_overview_3(df)
 
     data_json = gen_3

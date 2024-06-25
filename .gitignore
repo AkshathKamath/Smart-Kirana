@@ -3,3 +3,4 @@ Arch.png
 /dataset
 **/node_modules
 **/images
+**/.env
